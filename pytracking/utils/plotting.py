@@ -110,7 +110,7 @@ def _pascal_color_map(N=256, normalized=False):
     return cmap
 
 
-def overlay_mask(im, ann, alpha=0.5, colors=None, contour_thickness=None):
+def overlay_mask(im, ann, alpha=0.0, colors=None, contour_thickness=None):
     """ Overlay mask over image.
     Source: https://github.com/albertomontesg/davis-interactive/blob/master/davisinteractive/utils/visualization.py
     This function allows you to overlay a mask over an image with some
@@ -130,7 +130,7 @@ def overlay_mask(im, ann, alpha=0.5, colors=None, contour_thickness=None):
         Numpy Array: Image of the overlay with shape (H, W, 3) and data type
             `np.uint8`.
     """
-    im, ann = np.asarray(im, dtype=np.uint8), np.asarray(ann, dtype=np.int)
+    im, ann = np.asarray(im, dtype=np.uint8), np.asarray(ann, dtype=int)
     if im.shape[:-1] != ann.shape:
         raise ValueError('First two dimensions of `im` and `ann` must match')
     if im.shape[-1] != 3:
@@ -144,7 +144,7 @@ def overlay_mask(im, ann, alpha=0.5, colors=None, contour_thickness=None):
 
     img = im.copy()
     img[ann > 0] = fg[ann > 0]
-
+    print(np.unique(ann), np.unique(img))
     if contour_thickness:  # pragma: no cover
         import cv2
         for obj_id in np.unique(ann[ann > 0]):

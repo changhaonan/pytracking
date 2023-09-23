@@ -328,7 +328,7 @@ class Tracker:
         frame_number = 0
 
         if videofilepath is not None:
-            assert os.path.isfile(videofilepath), "Invalid param {}".format(videofilepath)
+            # assert os.path.isfile(videofilepath), "Invalid param {}".format(videofilepath)
             ", videofilepath must be a valid videofile"
             cap = cv.VideoCapture(videofilepath)
             ret, frame = cap.read()
@@ -403,7 +403,7 @@ class Tracker:
                         mask_image = overlay_mask(mask_image, out['segmentation'])
                         if not os.path.exists(self.results_dir):
                             os.makedirs(self.results_dir)
-                        cv.imwrite(self.results_dir + f"seg_{frame_number}.jpg", mask_image)
+                        cv.imwrite(self.results_dir + f"seg_{frame_number}.png", mask_image)
 
                 if 'target_bbox' in out:
                     for obj_id, state in out['target_bbox'].items():
