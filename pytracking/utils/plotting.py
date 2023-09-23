@@ -144,7 +144,6 @@ def overlay_mask(im, ann, alpha=0.0, colors=None, contour_thickness=None):
 
     img = im.copy()
     img[ann > 0] = fg[ann > 0]
-    print(np.unique(ann), np.unique(img))
     if contour_thickness:  # pragma: no cover
         import cv2
         for obj_id in np.unique(ann[ann > 0]):
